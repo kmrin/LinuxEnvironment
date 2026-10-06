@@ -1,0 +1,301 @@
+format = """
+[╭─](mauve)\
+$os\
+[ ](bg:red fg:mauve)\
+$username\
+$hostname\
+[](bg:peach fg:red)\
+[  ](bg:peach fg:black)\
+$directory\
+[ ](bg:peach)\
+[](bg:yellow fg:peach)\
+$git_branch\
+$git_status\
+$git_commit\
+$git_metrics\
+[](fg:yellow bg:green)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:green bg:sapphire)\
+$conda\
+[](fg:sapphire bg:lavender)\
+[](fg:lavender)\
+$line_break\
+[╰─](mauve)\
+$character\
+"""
+
+# format = """
+# [╭─](mauve)\
+# $os\
+# [ ](bg:red fg:mauve)\
+# $username\
+# $hostname\
+# [](bg:peach fg:red)\
+# [  ](bg:peach fg:black)\
+# $directory\
+# [ ](bg:peach)\
+# [](bg:yellow fg:peach)\
+# $git_branch\
+# $git_status\
+# $git_commit\
+# $git_metrics\
+# [](fg:yellow bg:green)\
+# $c\
+# $rust\
+# $golang\
+# $nodejs\
+# $php\
+# $java\
+# $kotlin\
+# $haskell\
+# $python\
+# [](fg:green bg:sapphire)\
+# $conda\
+# [](fg:sapphire bg:lavender)\
+# [](fg:lavender)\
+# $fill\
+# [](fg:red)\
+# $status\
+# [](fg:mauve bg:red)\
+# $cmd_duration\
+# [](bg:mauve fg:lavender)\
+# $time\
+# [](bg:mauve fg:lavender)\
+# [](fg:mauve)\
+# $line_break\
+# [╰─](mauve)\
+# $character\
+# """
+
+# [─╮](fg:mauve)\
+
+# right_format = """
+# [─╯](mauve)\
+# """
+palette = 'catppuccin_mocha'
+add_newline = false
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[os]
+format = "[ $symbol]($style)()"
+style = "bg:mauve fg:crust"
+disabled = false
+
+[os.symbols]
+AIX = "AIX "
+Alpaquita = "\uf26a " # \uf26a  # \ue3a5\ue390 
+AlmaLinux = "\uf31d " # 
+Alpine = "\uf300 " # ""
+Amazon = "\uf270 " # ""
+Android = "\ue70e " # ""
+Arch = "\uf303 " # ""
+Artix = "\uf31f " # 
+CentOS = "\uf304 " # ""
+Debian = "\uf306 " # ""
+DragonFly = "\ueef8 " #    🐉
+Emscripten = "\u26A1 " # ⚡
+EndeavourOS = "\uf322 " # "" # 
+Fedora = "\uf30a " # ""
+FreeBSD = "\uf30c " # ""
+Garuda = "\uf337 " # ""
+Gentoo = "\uf30d " # ""
+HardenedBSD = "\uf132 " # 
+Illumos = "\uf326 " # "🐦"
+Kali = "\uf327 " # 
+Linux = "\uf17c " # ""
+Mabox = "\uf1b2 " #  📦
+Macos = "\uf302 " # ""
+Manjaro = "\uf312 " # ""
+Mariner = "\ue7ae " # \ue7ae 
+MidnightBSD = "\ue3e0 " # 🌘
+Mint = "\uf30e " # ""
+NetBSD = "\u2691 " # ⚑
+NixOS = "\uf313 " # ""
+OpenBSD = "\uf328 " # ""
+OpenCloudOS = "\uf0c2 " # 
+openEuler = "\u2208 " # \u2208 ∈
+openSUSE = "\uf314 " # ""
+OracleLinux = "\u213A " # \u213A ℺ # ⊂⊃ \u2282\u2283
+Pop = "\uf32a " # ""
+Raspbian = "\uf315 " # ""
+Redhat = "\uf316 " # "" # 󱄛
+RedHatEnterprise = "\uf316 " # "" # 󱄛
+RockyLinux = "\uf32b " # 
+Redox = "\uf331 " #   󰺕
+Solus = "\uf32d " # "" # " "
+SUSE = "\uef6d " # ""
+Ubuntu = "\uf31b " # ""
+Ultramarine = "󱙳 " # 🔷
+Unknown = "\uf108 " # ""
+Void = "\uf32e " #  
+Windows = "\uf17a " # ""
+
+[username]
+show_always = true
+style_user = "bg:red fg:crust"
+style_root = "bg:red fg:crust bold"
+format = '[$user]($style)'
+
+[hostname]
+format = '[@$hostname ](bg:red fg:crust)'
+ssh_only = false
+# ssh_symbol = "@" # \ue36e '' # '⇒' # ' ' # 'ﬁ⇒'
+# trim_at = '.companyname.com'
+disabled = false
+
+[fill]
+symbol = ' '
+style = 'bold subtext1'
+
+[directory]
+style = "bg:peach fg:crust"
+format = '[$path]($style)[$read_only]($read_only_style)'
+truncation_length = 3
+truncation_symbol = "~/"
+read_only = ' 🔒'
+read_only_style = 'bg:peach'
+
+[git_branch]
+symbol = ""
+style = "bg:yellow"
+format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
+
+[git_commit]
+format = '[\($hash$tag\)]($style)[ ]()'
+style = 'bg:yellow'
+commit_hash_length = 8
+tag_symbol = " \uf412 " # \uf412 '  ' # '  ''
+tag_disabled = false
+disabled = false
+
+[git_metrics]
+format = '[\[+$added/]($added_style)[-$deleted\]]($deleted_style)[ ](bg:yellow)'
+added_style = 'bg:yellow fg:crust'
+deleted_style = 'bg:yellow fg:crust'
+disabled = false
+
+[git_status]
+style = "bg:yellow"
+format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[c]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[php]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[java]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+
+[python]
+symbol = ""
+style = "bg:green"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:sapphire"
+format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
+
+[conda]
+symbol = "  "
+style = "fg:crust bg:sapphire"
+format = '[$symbol$environment ]($style)'
+ignore_base = false
+
+[status]
+format = "[$symbol $status $hex_status( \uf0a2 $signal_number-$signal_name)]($style)" # \uf0a2  , \ueaa2
+#format = "[$symbol $status ]($style)" # \uf0a2  , \ueaa2
+style = 'fg:crust bg:red'
+success_symbol = '' # '✔'
+symbol = " \u2717" # \u2717 \uf467 \uebde  ✘
+disabled = false
+map_symbol = false
+
+[time]
+# format = "[ $time ]($style)"
+format = "[ $time ⌚ ]($style)"
+style = 'bg:lavender fg:crust'
+disabled = false # set to 'false', if you want to see the time
+
+[cmd_duration]
+show_milliseconds = true
+format = "[ took [$duration ](bold fg:crust bg:mauve)](fg:crust bg:mauve)"
+disabled = false
+show_notifications = true
+min_time_to_notify = 45000
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[✘](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'

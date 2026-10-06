@@ -1,0 +1,53 @@
+#!/usr/bin/bash
+# Regenerates the initramfs of kernels that have the NVIDIA kernel module, so the copy of the module inside
+# the initramfs always matches the installed driver. Does nothing unless the NVIDIA modules were added to the
+# initramfs through /etc/dracut.conf.d/nvidia.conf.
+#
+# Called automatically by /etc/dnf/libdnf5-plugins/actions.d/nvidia-initramfs.actions every time akmods
+# installs a newly built module (kmod-nvidia-<kernel version> package). Can also be run manually:
+#
+#   nvidia-initramfs                  Every installed kernel that has the NVIDIA module.
+#   nvidia-initramfs <kernel>...      Only the given kernels (kernel versions or kmod-nvidia-<kernel version>).
+#
+# Nothing is written to stdout, as the DNF actions plugin reads it as commands. Messages go to stderr and to
+# the journal (journalctl -t nvidia-initramfs).
+
+log() {
+    echo "nvidia-initramfs: $*" >&2
+    logger -t nvidia-initramfs -- "$*"
+}
+
+if (( EUID != 0 )); then
+    echo "nvidia-initramfs: must be run as root" >&2
+    exit 1
+fi
+
+[[ -f /etc/dracut.conf.d/nvidia.conf ]] || exit 0
+
+kernels=()
+if (( $# )); then
+    for arg in "$@"; do
+        kernels+=("${arg#kmod-nvidia-}")
+    done
+else
+    for dir in /lib/modules/*/; do
+        dir=${dir%/}
+        kernels+=("${dir##*/}")
+    done
+fi
+
+status=0
+for kver in "${kernels[@]}"; do
+    # Skips anything that isn't an installed kernel with the NVIDIA module, such as the kmod-nvidia meta package.
+    version=$(modinfo -F version -k "$kver" nvidia 2>/dev/null) || continue
+
+    log "Regenerating the initramfs of kernel $kver (NVIDIA $version)..."
+    if systemd-cat -t nvidia-initramfs dracut --force --kver "$kver"; then
+        log "Done."
+    else
+        log "FAILED, see: journalctl -t nvidia-initramfs"
+        status=1
+    fi
+done
+
+exit "$status"

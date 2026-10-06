@@ -1,0 +1,13 @@
+# Main
+set atblanks
+set autoindent
+set constantshow
+set indicator
+set linenumbers
+set mouse
+set softwrap
+set tabsize 2
+set tabstospaces
+
+# Extra
+include "~/.nano/*.nanorc"

@@ -1,0 +1,5 @@
+# Regenerates the initramfs every time akmods installs a newly built NVIDIA kernel module, so the copy of the
+# module inside the initramfs always matches the installed driver. akmods installs its builds through DNF as
+# kmod-nvidia-<kernel version> packages, both after kernel updates and after driver updates.
+# See /usr/local/bin/nvidia-initramfs.
+post_transaction:kmod-nvidia-*:in:enabled=host-only:/usr/local/bin/nvidia-initramfs ${pkg.name}
